@@ -1,15 +1,16 @@
 const express = require('express');
 const router = express.Router();
+const authChecker = require('../middleware/auth-checker');
+const UsersController = require('../controllers/users');
 
 
-// Handle incoming GET requests to /users
-router.get('/', (req, res, next) => {
-    res.status(200).json({
-        message: 'Get All Users ... '
-    });
-});
+// get list of users users/
+router.get('/',UsersController.get_all_users);
 
-// Handle incoming GET By ID requests to /users/1
+
+
+
+// GET By ID requests to /users/1
 router.get('/:userId', (req, res, next) => {
     res.status(200).json({
         message: 'Get User By ID',

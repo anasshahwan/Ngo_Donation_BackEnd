@@ -13,7 +13,7 @@ const userSchema = mongoose.Schema({
         match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
     },
     password: { type: String, required: true },
-    role: [{ type: Schema.Types.ObjectId, ref: 'Role' }]
+     role: { type: Schema.Types.ObjectId, ref: 'Role' }
 });
 
 module.exports = mongoose.model('User', userSchema);
