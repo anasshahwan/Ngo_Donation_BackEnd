@@ -5,7 +5,7 @@ const UsersController = require('../controllers/users');
 
 
 // get list of users users/
-router.get('/',UsersController.get_all_users);
+router.get('/', UsersController.get_all_users);
 
 
 
