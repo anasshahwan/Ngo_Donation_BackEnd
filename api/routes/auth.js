@@ -1,14 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const AuthController = require('../controllers/auth')
-// Create a New User 
 
+
+// Create a New User   http://localhost:3000/auth/register
 router.post("/register", AuthController.register);
 
  // Log in 
  router.post("/login", AuthController.login);
-
-
 
 // Log out 
 router.post('/logout', (req, res, next) => {

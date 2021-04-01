@@ -9,7 +9,6 @@ router.get('/', UsersController.get_all_users);
 
 
 
-
 // GET By ID requests to /users/1
 router.get('/:userId', (req, res, next) => {
     res.status(200).json({
