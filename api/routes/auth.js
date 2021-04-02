@@ -11,9 +11,16 @@ router.post("/register", AuthController.register);
 
 // Log out 
 router.post('/logout', (req, res, next) => {
-    res.status(201).json({
-        message: 'User has Been Logged Out '
-    });
+    console.log(req.headers.authorization.split(' ')[1])
+    // req.user.deleteToken(req.token,(err,user)=>{
+    //     if(err) return res.status(400).send(err);
+    //     res.sendStatus(200);
+    // });
+    // req.user.deleteToken(req.token,(err,user)=>{
+    //     if(err) return res.status(400).send(err);
+    //     res.sendStatus(200);
+    // });
+
 });
 
 module.exports = router;

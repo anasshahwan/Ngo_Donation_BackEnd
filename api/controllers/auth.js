@@ -4,25 +4,26 @@ const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 
 exports.login = (req, res, next) => {
-    User.find({ email: req.body.email })
+    User.findOne({ email: req.body.email })
+    .populate('role','type')
       .exec()
       .then(user => {
-        if (user.length < 1) {
+        if (user < 1) {
           return res.status(401).json({
-            message: "Auth failed"
+            message: "Sorry! We can't find your email in our database record."
           });
         }
-        bcrypt.compare(req.body.password, user[0].password, (err, result) => {
+        bcrypt.compare(req.body.password, user.password, (err, result) => {
           if (err) {
             return res.status(401).json({
-              message: "Auth failed"
+              message: "Your Password Dosent Match"
             });
           }
           if (result) {
             const token = jwt.sign(
               {
-                email: user[0].email,
-                userId: user[0]._id
+                email: user.email,
+                userId: user._id
               },
               'secret',
               {
@@ -31,11 +32,17 @@ exports.login = (req, res, next) => {
             );
             return res.status(200).json({
               message: "Auth successful",
-              token: token
+              _id:user._id,
+              firstname:user.firstname,
+              lastname:user.lastname,
+              email:user.email,
+              role:user.role,         
+              token: token,
+              
             });
           }
           res.status(401).json({
-            message: "Auth failed"
+            message: "Your Password dosent Match."
           });
         });
       })
