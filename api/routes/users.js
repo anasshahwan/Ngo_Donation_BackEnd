@@ -29,15 +29,9 @@ router.get('/:userId', (req, res, next) => {
 })
 });
 
+
 // Delete user by ID /user/userid
-
-router.delete('/:userId', (req, res, next) => {
-    res.status(200).json({
-        message: 'User Was  deleted',
-        orderId: req.params.userId
-    });
-});
-
+router.delete("/:userId", UsersController.delete_user );
 
 
 module.exports = router;
