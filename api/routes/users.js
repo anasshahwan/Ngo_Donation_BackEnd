@@ -18,14 +18,16 @@ router.get('/:userId', (req, res, next) => {
     });
 });
 
-// Edit user By Id  /user/userid
-router.put('/:userId', (req, res, next) => {
-    res.status(200).json({
-        message: 'User Was  Updated',
-        orderId: req.params.userId
-    });
+// GET By ID requests to /users/1
+router.get('/:userId', (req, res, next) => {
+   User.findById(req.params.userId, (error, data)=> {
+   if (error){
+       return next(error)
+   }else {
+       res.json(data)
+   }
+})
 });
-
 
 // Delete user by ID /user/userid
 
