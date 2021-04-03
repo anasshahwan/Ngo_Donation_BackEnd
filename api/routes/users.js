@@ -29,6 +29,9 @@ router.get('/:userId', (req, res, next) => {
 })
 });
 
+// Edit user By Id  /user/userid
+router.put("/:userId", UsersController.update_user);
+
 
 // Delete user by ID /user/userid
 router.delete("/:userId", UsersController.delete_user );
