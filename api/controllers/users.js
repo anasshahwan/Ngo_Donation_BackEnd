@@ -14,3 +14,19 @@ exports.get_all_users = (req, res, next) => {
       });
     });
 }
+
+exports.delete_user = (req, res, next) => {
+  const id = req.params.userId;
+  console.log(id)
+  User.remove({_id:id})
+     .exec()
+     .then(result => {
+       res.status(200).json(result);
+     })
+     .catch(err => {
+       console.log(err);
+       res.status(500).json({
+         error:err
+       });
+     });
+}
