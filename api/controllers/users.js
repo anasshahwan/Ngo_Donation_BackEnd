@@ -1,10 +1,11 @@
 const User = require('../Models/User');
+const mongoose =require('mongoose')
 
 exports.get_all_users = (req, res, next) => {
 
     User.find()
     .populate('role','type')
-    .exec()
+    .exec ()
     .then(docs => {
         res.status(200).json(docs);           
       })
@@ -14,7 +15,6 @@ exports.get_all_users = (req, res, next) => {
       });
     });
 }
-
 
 exports.delete_user = (req, res, next) => {
   const id = req.params.userId;
@@ -31,7 +31,6 @@ exports.delete_user = (req, res, next) => {
        });
      });
 }
-
 
 exports.update_user = (req, res, next) => {
   const id = req.params.userId;
@@ -57,3 +56,37 @@ exports.update_user = (req, res, next) => {
        });
      });
 }
+
+
+exports.get_userByID = (req, res, next) => {
+
+  User.findById(req.params.userId)
+  .populate('role','type')
+  .exec()
+  .then(docs => {
+    console.log(docs);
+    //   if (docs.length >= 0) {
+    res.status(200).json({
+        
+      message: 'User Details',
+      _id: new mongoose.Types.ObjectId(),
+              firstname:docs.firstname,
+              lastname:docs.lastname,
+              email: docs.email,
+              role:docs.role, 
+    });
+    //   } else {
+    //       res.status(404).json({
+    //           message: 'No entries found'
+    //       });
+    //   }
+  })
+  .catch(err => {
+    console.log(err);
+    res.status(500).json({
+      error: err
+    });
+  });
+
+
+};
