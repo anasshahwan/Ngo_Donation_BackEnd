@@ -32,6 +32,7 @@ exports.delete_user = (req, res, next) => {
      });
 }
 
+
 exports.update_user = (req, res, next) => {
   const id = req.params.userId;
   console.log(id)
