@@ -36,13 +36,12 @@ exports.add_donation_type = (req, res, next) => {
 };
 
 //updates donation type info
-exports.update_donation_type = (req, res, next) => {
+exports.update_donation_type = (req, res) => {
     const id = req.params.donTypeId;
     console.log(id)
     DonationType.findOneAndUpdate({_id:id},
     {
         $set: {
-            _id: new mongoose.Types.ObjectId(),
             donName: req.body.donName,
             isActive: req.body.isActive
         }

@@ -1,4 +1,5 @@
 const express = require('express');
+const { models } = require('mongoose');
 const router = express.Router();
 const DonationTypeController = require('../controllers/donationType');
 
@@ -11,15 +12,22 @@ router.get('/', DonationTypeController.get_all_donation_types);
 
 
 // get donation type by id '/donationTypes/:donTypeId'
-router.get('/:donTypeId', (req, res, next) => {
-    DonationType.findById(req.params.donTypeId, (error, data) => {
-        if (error){
-            return next(error)
-        }else {
-            res.json(data)
-        }
-    });
+router.get('/:donTypeId', function(req, res, next) {
+    var id = req.params.donTypeId
+    models.DonationType.findById(id)
+    .lean().exec().then(result => {
+        res.status(200).json(result);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({
+            error:err
+        })
+    })
+    
 });
+
+    
 
 //Edit donation type by Id  '/donationTypes/:donTypeId'
 router.put("/:donTypeId", DonationTypeController.update_donation_type);

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 const donTypeSchema = mongoose.Schema({
-    _id: mongoose.Schema.Types.ObjectId,
+    _id: {type: mongoose.Types.ObjectId, auto: true},
     donName: { type: String, required: true},
     isActive: {type: Boolean, required:true, default:1},
 });
