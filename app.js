@@ -8,12 +8,11 @@ const mongoose = require("mongoose");
 const userRoutes = require('./api/routes/users');
 const authRoutes = require('./api/routes/auth');
 const roleRoutes = require('./api/routes/roles');
+const donTypeRoutes = require('./api/routes/donationTypes');
+const donationRoutes = require('./api/routes/donations');
 
-
-
-
-  
 const url = `mongodb+srv://Admin:Test.123@ngodonationdb.t82yp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
+
 
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
 
@@ -40,8 +39,8 @@ app.use((req, res, next) => {
 app.use('/users', userRoutes);
 app.use('/auth', authRoutes);
 app.use('/roles', roleRoutes);
-
-
+app.use('/donationTypes', donTypeRoutes);
+app.use('/donations', donationRoutes);
 
 
 
