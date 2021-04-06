@@ -1,4 +1,5 @@
 const User = require('../Models/User');
+const UserProfile = require('../Models/UserInformation');
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
@@ -82,6 +83,32 @@ exports.register = (req, res, next) => {
                 .save()
                 .then(result => {
                   console.log(result);
+                  
+                  const userprofile = new UserProfile({
+                    _id: new mongoose.Types.ObjectId(),
+                    user_id:result._id,
+                    cma:"",
+                    phone_number:"",
+                    address:"",
+                    city:"",
+                    state:"",
+                    zip_code:"",
+                    country:""
+                     
+                
+                  });
+
+          userprofile.save().then(res=>{
+            console.log("Was Added")
+
+            console.log(res)
+          },).catch(err=>console.log(err));
+// ADd          
+
+
+
+
+
                   res.status(201).json({
                     message: "User created"
                   });
