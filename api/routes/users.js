@@ -4,6 +4,7 @@ const authChecker = require('../middleware/auth-checker');
 const UsersController = require('../controllers/users');
 const User = require('../Models/User');
 
+
 // get list of users users/
 router.get('/', UsersController.get_all_users);
 
@@ -25,4 +26,6 @@ router.get('/:userId', UsersController.get_userByID);
 
 // Delete user by ID /user/userid
 router.delete("/:userId", UsersController.delete_user );
+
+
 module.exports = router;

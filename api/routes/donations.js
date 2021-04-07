@@ -3,6 +3,7 @@ const { models } = require('mongoose');
 const router = express.Router();
 const DonationsController = require('../controllers/donations');
 const Donation = require('../Models/Donation');
+var stripe = require('stripe')('sk_test_2URLv8ytIlNrxnh2JzvFPhBV');
 
 //get all donations  '/donations'
 router.get('/', DonationsController.get_all_donations);
@@ -26,15 +27,6 @@ router.get('/:id', (req, res, next) => {
 
 //add donation '/donations/addDonation'
 // router.post('/addDonation', DonationsController.create_donation);
-router.post('/addDonation', (req, res, next) => {
-    Donation.create(req.body, (error, data) => {
-        if (error){
-            return next(error)
-        }else {
-            res.json(data)
-        }
-    })    
-
-});
+router.post('/addDonation', DonationsController.create_donation);
 
 module.exports = router;
